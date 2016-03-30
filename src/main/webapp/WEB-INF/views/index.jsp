@@ -47,15 +47,18 @@
 <script src="/res/js/sockjs-client.js"></script>
 <script src="/res/js/stomp.js"></script>
 <script>
-    var socket = new SockJS('${pageContext.servletContext.contextPath}/ws');
+    var socket = new SockJS('http://192.168.1.99:8081/ws');
     var stompClient = Stomp.over(socket);
+
+
+
     stompClient.connect({}, function (frame) {
         stompClient.subscribe('/topic/update-history', function (e) {
             var history = JSON.parse(e.body);
 
             var historyText = "";
 
-            for (var i in history.messages) {
+            for (var i in history.messages.reverse()) {
                 var message = history.messages[i];
 
                 var ts = new Date(message.timestamp);
@@ -68,6 +71,7 @@
             }
 
             $('#history').val(historyText);
+
         });
 
         stompClient.send('/app/update', {}, undefined);
@@ -80,6 +84,7 @@
             stompClient.send("/app/send-message", {}, JSON.stringify({
                 text: message
             }));
+            $('#message').val("");
         }
 
         return false;

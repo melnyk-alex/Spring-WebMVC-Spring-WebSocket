@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Created by human on 3/20/16.
  */
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/")
 public class BaseController {
 
-//    @ResponseStatus(HttpStatus.PERMANENT_REDIRECT)
-//    @RequestMapping(method = RequestMethod.GET, path = "/")
-//    public String getRoot() {
-//        return "redirect:/index";
-//    }
+    @ResponseStatus(HttpStatus.PERMANENT_REDIRECT)
+    @RequestMapping(method = RequestMethod.GET, path = "/")
+    public String getRoot() {
+        return "redirect:/index";
+    }
 
     @RequestMapping(method = RequestMethod.GET, path = "/index")
     public String getIndex() {

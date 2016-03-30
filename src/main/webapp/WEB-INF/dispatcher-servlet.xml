@@ -17,8 +17,8 @@
     </mvc:view-resolvers>
 
     <websocket:message-broker application-destination-prefix="/app">
-        <websocket:stomp-endpoint path="/ws">
-            <websocket:sockjs/>
+        <websocket:stomp-endpoint path="/ws" allowed-origins="192.168.1.99:8081">
+            <websocket:sockjs />
         </websocket:stomp-endpoint>
         <websocket:simple-broker prefix="/topic" />
     </websocket:message-broker>
